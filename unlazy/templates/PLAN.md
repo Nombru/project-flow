@@ -1,0 +1,36 @@
+# Plan: <task>
+
+Depth: tree <N>   Mode: orchestrated
+Budget note: <what a competent single pass would take; context, not arithmetic>
+
+## Contract
+
+Decided BEFORE fan-out. Everything a leaf could get wrong about its neighbors:
+
+- Interfaces: <function signatures, file formats, API shapes>
+- Data ownership: <which leaf owns which files; no two leaves share a file>
+- Naming and conventions: <casing, folder layout, error handling style>
+
+## Tree
+
+Each leaf carries its gates file and its **wave**. Wave 1 is everything with no
+blockers; a leaf is in wave N+1 if its last blocker is in wave N. Every leaf in
+a wave dispatches concurrently — see references/orchestration.md.
+
+- 1 <task>
+  - 1.1 <branch> .......... gates/node-1.1.md
+    - 1.1.1 <leaf> ........ gates/leaf-1.1.1.md .... w1
+    - 1.1.2 <leaf> ........ gates/leaf-1.1.2.md .... w1
+  - 1.2 <branch> .......... gates/node-1.2.md
+    - 1.2.1 <leaf> ........ gates/leaf-1.2.1.md .... w1
+    - 1.2.2 <leaf> ........ gates/leaf-1.2.2.md .... w2  (blocked by 1.2.1)
+
+If every leaf lands in its own wave, nothing runs concurrently and the split is
+probably wrong — check whether those dependencies are real.
+
+## Status log
+
+Append-only. One line per event: leaf started, leaf verified, gate abandoned.
+Never rewrite lines above; appending keeps the file cheap to re-read and diff.
+
+- <timestamp or step> plan written, contract fixed
