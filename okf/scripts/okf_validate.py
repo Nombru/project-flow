@@ -14,14 +14,14 @@ concept_pass, concept_fail, reserved_notes = [], [], []
 
 SCHEMA_NAMES = {"CLAUDE.md", "AGENTS.md", "GEMINI.md", "CODEBUDDY.md", "COPILOT.md"}
 EXCL = {".git", ".claude", "node_modules", ".venv", "venv", "graphify-out", "dist", "build", "__pycache__", ".gstack"}
-# Repos owned by someone else are not part of this bundle — see okf_paths.
+# Repos owned by someone else are not part of this bundle, see okf_paths.
 FOREIGN_REPOS = foreign_repo_roots(ROOT, EXCL)
 for p in sorted(ROOT.rglob("*.md")):
     if any(part in EXCL for part in p.parts):
         continue
     if in_foreign_repo(p, FOREIGN_REPOS):
         continue
-    if p.name in SCHEMA_NAMES:      # OKF 'schema' layer, not concept docs — out of scope
+    if p.name in SCHEMA_NAMES:      # OKF 'schema' layer, not concept docs, out of scope
         continue
     rel = p.relative_to(ROOT)
     text = p.read_text(encoding="utf-8")
@@ -59,7 +59,7 @@ for p in sorted(ROOT.rglob("*.md")):
     except D.OKFDocumentError as e:
         concept_fail.append(f"{rel}: {e}")
 
-print(f"Google OKF reference validator — required keys: {D.REQUIRED_FRONTMATTER_KEYS}")
+print(f"Google OKF reference validator, required keys: {D.REQUIRED_FRONTMATTER_KEYS}")
 print(f"Bundle: {ROOT}\n")
 print(f"CONCEPT DOCS: {len(concept_pass)} passed, {len(concept_fail)} failed")
 for f in concept_fail: print("  FAIL", f)

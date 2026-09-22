@@ -15,7 +15,7 @@ Decided BEFORE fan-out. Everything a leaf could get wrong about its neighbors:
 
 Each leaf carries its gates file and its **wave**. Wave 1 is everything with no
 blockers; a leaf is in wave N+1 if its last blocker is in wave N. Every leaf in
-a wave dispatches concurrently — see references/orchestration.md.
+a wave dispatches concurrently, see references/orchestration.md.
 
 - 1 <task>
   - 1.1 <branch> .......... gates/node-1.1.md
@@ -26,7 +26,7 @@ a wave dispatches concurrently — see references/orchestration.md.
     - 1.2.2 <leaf> ........ gates/leaf-1.2.2.md .... w2  (blocked by 1.2.1)
 
 If every leaf lands in its own wave, nothing runs concurrently and the split is
-probably wrong — check whether those dependencies are real.
+probably wrong, check whether those dependencies are real.
 
 ## Status log
 

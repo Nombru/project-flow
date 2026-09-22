@@ -21,7 +21,7 @@ EXCLUDE_DIRS = {".git", ".claude", "node_modules", ".venv", "venv", "graphify-ou
                 "build", "__pycache__", ".gstack"}
 SKIP_NAMES = {"CLAUDE.md", "AGENTS.md", "GEMINI.md", "CODEBUDDY.md", "COPILOT.md"}
 RESERVED = {"index.md", "log.md"}
-# Repos owned by someone else are not part of this bundle — see okf_paths. Your
+# Repos owned by someone else are not part of this bundle, see okf_paths. Your
 # own projects are almost all git repos and must still be processed, so the test
 # is the origin remote's owner, not merely "is a nested repo".
 FOREIGN_REPOS = foreign_repo_roots(ROOT, EXCLUDE_DIRS)
@@ -147,8 +147,8 @@ def run_frontmatter():
         fm,raw,body,had=split_fm(text)
         parseable = isinstance(fm,dict) and "__unparseable__" not in fm
         if is_conformant(fm): skipped+=1; continue
-        if had and not parseable:   # malformed YAML — never auto-rewrite (would destroy their content)
-            print(f"[skip-unparseable] {p.relative_to(ROOT)} — fix by hand"); skipped+=1; continue
+        if had and not parseable:   # malformed YAML, never auto-rewrite (would destroy their content)
+            print(f"[skip-unparseable] {p.relative_to(ROOT)}, fix by hand"); skipped+=1; continue
         existing = fm if parseable else {}
         # only compute what's MISSING (preserves existing keys; minimizes LLM calls)
         add = {}

@@ -2,7 +2,7 @@
 """OKF lint (READ-ONLY): health check for an OKF bundle. Fixes nothing.
 Usage: okf_lint.py <folder> [--stale-days N]
 Checks: non-conformant frontmatter, broken internal links (OKF treats these as
-'not yet written' — informational), orphan docs (not linked from any index.md),
+'not yet written', informational), orphan docs (not linked from any index.md),
 and stale docs (timestamp older than N days, default 180).
 """
 import sys, re, pathlib, datetime
@@ -23,7 +23,7 @@ SCHEMA_NAMES = {"CLAUDE.md","AGENTS.md","GEMINI.md","CODEBUDDY.md","COPILOT.md"}
 RESERVED = {"index.md","log.md"}
 REQUIRED = ("type","title","description","timestamp")
 LINK = re.compile(r'\]\(([^)]+)\)')
-# Repos owned by someone else are not part of this bundle — see okf_paths.
+# Repos owned by someone else are not part of this bundle, see okf_paths.
 FOREIGN_REPOS = foreign_repo_roots(ROOT, EXCLUDE_DIRS)
 
 def all_md():
@@ -95,12 +95,12 @@ for p in concept_docs():
     if age > STALE_DAYS: stale.append((p, age))
 
 rel = lambda p: p.relative_to(ROOT)
-print(f"OKF lint — {ROOT}  (stale threshold: {STALE_DAYS} days)\n")
-print(f"[frontmatter] {len(missing)} concept doc(s) not conformant" + ("  — run enrich" if missing else "  ✓"))
+print(f"OKF lint, {ROOT}  (stale threshold: {STALE_DAYS} days)\n")
+print(f"[frontmatter] {len(missing)} concept doc(s) not conformant" + (", run enrich" if missing else "  ✓"))
 for p, why in missing[:50]: print(f"   - {rel(p)}: {why}")
-print(f"\n[links] {len(broken)} broken internal link(s)  (OKF: 'not yet written' — informational)")
+print(f"\n[links] {len(broken)} broken internal link(s)  (OKF: 'not yet written', informational)")
 for p, u in broken[:50]: print(f"   - {rel(p)} -> {u}")
-print(f"\n[orphans] {len(orphans)} concept doc(s) not linked from any index.md" + ("  — run indexes" if orphans else "  ✓"))
+print(f"\n[orphans] {len(orphans)} concept doc(s) not linked from any index.md" + (", run indexes" if orphans else "  ✓"))
 for p in orphans[:50]: print(f"   - {rel(p)}")
 print(f"\n[stale] {len(stale)} doc(s) older than {STALE_DAYS} days")
 for p, age in sorted(stale, key=lambda x: -x[1])[:50]: print(f"   - {rel(p)}  ({age}d)")

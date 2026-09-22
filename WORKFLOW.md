@@ -1,6 +1,6 @@
 # The Project Flow
 
-The standard every project runs on — from a fork in the road to shipped, reviewed, tested
+The standard every project runs on, from a fork in the road to shipped, reviewed, tested
 work, with QA feeding back in as a loop and what you learned recorded at the end.
 
 Stages 1–5 are adapted from **Matt Pocock's** [AI Hero](https://www.aihero.dev) workshop and
@@ -30,7 +30,7 @@ by making completion a file you check rather than a feeling you have.
 
 ## The flow at a glance
 
-Rendered chart: [flow-chart.svg](flow-chart.svg) — the same map with the design lane and wrappers, viewable anywhere.
+Rendered chart: [flow-chart.svg](flow-chart.svg), the same map with the design lane and wrappers, viewable anywhere.
 
 ```mermaid
 flowchart TD
@@ -74,23 +74,23 @@ Every skill is exactly one of these. The tier decides how it behaves, not how im
 | Tier | What it is | Members |
 |---|---|---|
 | **1 · Pipeline** | Sequenced and stateful. Hands off to the next stage and **ends by naming it**. | `decision-council` `grill-me` `write-a-prd` `to-tickets` `implement` `tdd` `qa` `triage` `okf` |
-| **2 · Discipline** | Cross-cutting. Changes *how* a stage executes. **Never names a next stage** — it wraps whatever is running. | `unlazy` `code-review` `simplify` `loop` `security-review` |
+| **2 · Discipline** | Cross-cutting. Changes *how* a stage executes. **Never names a next stage**: it wraps whatever is running. | `unlazy` `code-review` `simplify` `loop` `security-review` |
 | **3 · Craft** | Domain taste. Fires when the work is in that domain, silent otherwise. | `taste-skill:*` (plugin), `design`, `dataviz`, `artifact-design` |
 | **4 · Knowledge** | Maintains standing context. Produces no code, takes no ticket. | `okf`, `business-memory` (content), the reference corpora |
 
 > **The tier-1 test:** if a skill ends with a `▶ Next` breadcrumb, it's a stage. If it told you
-> where to go next but wraps other work, it's mislabelled — a discipline that claims to be a
+> where to go next but wraps other work, it's mislabelled; a discipline that claims to be a
 > stage will fight the stage it's wrapping.
 
 ---
 
 ## Three things that wrap the flow but are never a stage
 
-**`unlazy` — the discipline layer.** Writes acceptance gates to a file *before* stage 4 starts
+**`unlazy`: the discipline layer.** Writes acceptance gates to a file *before* stage 4 starts
 and holds stage 5 to them. Gates carry `CHECK:` commands and `EXPECT:` matches, so done is a
 shell exit rather than a feeling. See "The boundary that matters" below.
 
-**`overnight-switchboard` — the router.** Reads the capability tier stage 3 already stamped on
+**`overnight-switchboard`: the router.** Reads the capability tier stage 3 already stamped on
 each ticket and picks the executor. Stage 3 is the *only* place tier is decided; the switchboard
 never re-derives it.
 
@@ -101,9 +101,9 @@ for house style. Read at stage 2 and again at stage 4. Never written by an agent
 
 ## The design lane
 
-How design work rides the same stages — no stage of its own. Three touchpoints:
+How design work rides the same stages, no stage of its own. Three touchpoints:
 
-**Stage 2 — define the look.** `write-a-prd`'s design step generates the mockup through
+**Stage 2, define the look.** `write-a-prd`'s design step generates the mockup through
 `taste-skill:imagegen-frontend-web` (one image per section) or `-mobile` (screen concepts in a
 phone frame), with the `imagegen` skill as the routing authority for *how* images get made:
 Hugging Face Spaces via `dynamic_space` for anything brand-bound or containing readable text
@@ -111,24 +111,24 @@ Hugging Face Spaces via `dynamic_space` for anything brand-bound or containing r
 throwaway exploration. Identity work (a rename, a client brand) goes through
 `taste-skill:brandkit` first.
 
-**Stage 2 → 4 — validate before building.** The approved images are the handoff, and the build
+**Stage 2 → 4, validate before building.** The approved images are the handoff, and the build
 route depends on the surface:
 
 | Surface | Route |
 |---|---|
 | Web code (client sites, landing pages) | `taste-skill:image-to-code` builds against the approved sections; `taste-skill` v2 + `soft-skill` set the code standards |
-| Squarespace (client sites) | Images feed a buildability gate (Native / CSS / Not-possible) — the prototype never bypasses it, because HTML can promise what Fluid Engine cannot deliver |
+| Squarespace (client sites) | Images feed a buildability gate (Native / CSS / Not-possible), the prototype never bypasses it, because HTML can promise what Fluid Engine cannot deliver |
 | Native app (iOS / macOS) | Concepts validate the direction only; the build is a normal stage-4 ticket in the platform's own idiom |
 
-**Stage 5 — design review.** For UI-facing tickets the review is two-part: `/code-review` for
+**Stage 5, design review.** For UI-facing tickets the review is two-part: `/code-review` for
 correctness, `taste-skill:redesign-skill` for the design audit (generic-AI patterns, cheap
-defaults) — applied to the diff's surfaces, without breaking function.
+defaults), applied to the diff's surfaces, without breaking function.
 
 **The rule that holds it together: house design language wins where one exists.** A product's
-locked brand, an agency brand foundation, a platform's own design language — taste skills execute
+locked brand, an agency brand foundation, a platform's own design language, taste skills execute
 *within* those. The style presets (`minimalist`, `brutalist`) are explicit-invoke
 only, for work deliberately outside a house style. Purely visual changes stay on the overnight
-exclusion list regardless — a wrong look is green in `xcodebuild` and still wrong.
+exclusion list regardless, a wrong look is green in `xcodebuild` and still wrong.
 
 ---
 
@@ -139,7 +139,7 @@ feature. The boundary:
 
 - **`to-tickets` owns decomposition *across* a feature.** It produces the queue: vertical
   slices, each a complete path through every layer, each declaring what blocks it.
-- **`unlazy`'s Depth Tree operates *inside* one ticket** — or replaces `to-tickets` entirely for
+- **`unlazy`'s Depth Tree operates *inside* one ticket**: or replaces `to-tickets` entirely for
   work that isn't a feature: refactors, audits, doc sweeps, migrations.
 
 Never both on the same axis.
@@ -149,16 +149,16 @@ leaf … dispatch the next leaf"*, with concurrency mentioned afterwards as some
 happen. Followed literally that serialises a build. We patched `references/orchestration.md` and
 `templates/PLAN.md` for **wave dispatch**: compute the set of leaves whose blockers are verified,
 dispatch all of them up to the harness cap, recompute as they land. The contract's disjoint file
-ownership always made this safe — it just wasn't an instruction. Parent re-verification is
+ownership always made this safe, it just wasn't an instruction. Parent re-verification is
 unchanged and does not get cheaper because ten leaves returned at once.
 
 ---
 
-## Entering mid-flow — realigning what's already in flight
+## Entering mid-flow, realigning what's already in flight
 
 **`/flow` is the front door.** Run it at the start of any session, on any project: it
 inventories the PRDs, ticket queue, tracker labels, git state and gates, names the stage the
-project is in, and hands you the one command to run next. It is read-only — the stage skills
+project is in, and hands you the one command to run next. It is read-only, the stage skills
 do the work.
 
 Most projects won't start at stage 0. The rule `/flow` applies: **enter at the first stage
@@ -182,7 +182,7 @@ They are orthogonal and both are correct. **Never write a bare "tier" where both
 | **Capability tier** | Who should attempt the work | `mechanical` · `standard` · `hard` | `/to-tickets`, `/triage` | the switchboard |
 | **Permission tier** | How dangerous the action is | GREEN · YELLOW · RED | a skill's own guard | a `PreToolUse` hook |
 
-Capability tier is keyed to **failure-detectability, not difficulty** — would a wrong answer be
+Capability tier is keyed to **failure-detectability, not difficulty**: would a wrong answer be
 caught by the gate, or would it merge green and wrong? A broad covered refactor is `mechanical`.
 A one-line copy change nothing tests is `hard`. Tiers name a tier, never a model.
 
@@ -192,12 +192,12 @@ A one-line copy change nothing tests is `hard`. Tiers name a tier, never a model
 
 | Label | Meaning |
 |-------|---------|
-| `ready-for-agent` | AFK — an agent can implement and merge unattended |
+| `ready-for-agent` | AFK, an agent can implement and merge unattended |
 | `ready-for-human` / HITL | Needs your decision or hands |
 | `needs-triage` | New, unclassified |
 | `needs-info` | Waiting on the reporter |
 | `wontfix` | Closed without action, reason stated |
-| `bug` / `enhancement` | Category — triage assigns exactly one |
+| `bug` / `enhancement` | Category, triage assigns exactly one |
 | `tier:mechanical` · `tier:standard` · `tier:hard` | Capability tier |
 
 **Wide refactors** use expand→contract: add the new form alongside the old, migrate call sites
@@ -217,12 +217,12 @@ git repo with `gh`, always showing the draft and asking first.
 | 2 | `write-a-prd` | ✅ |
 | 3 | `to-tickets` | ✅ |
 | 4 | `implement` | ✅ explicit-invoke only |
-| 4 | `tdd` | ✅ written 2026-08-20 — closes the reference `implement` step 3 makes |
+| 4 | `tdd` | ✅ written 2026-08-20, closes the reference `implement` step 3 makes |
 | 5 | `code-review` | ✅ harness built-in |
 | 6 | `qa` | ✅ |
-| 7 | `triage` | ✅ written 2026-08-20 — closes the loop `/qa` opens |
+| 7 | `triage` | ✅ written 2026-08-20, closes the loop `/qa` opens |
 | 8 | `okf` | ✅ |
-| — | `unlazy` | ✅ vendored + wave-dispatch patch. **Stop hook not installed** — pending one proving run |
+|, | `unlazy` | ✅ vendored + wave-dispatch patch. **Stop hook not installed**: pending one proving run |
 
 ---
 
@@ -236,11 +236,11 @@ conformance as a tested in-repo library, and keeping a real `design-language/` a
 
 ## Sources
 
-- [Real-world feature build with Claude Code — aihero.dev](https://www.aihero.dev/real-world-feature-build-with-claude-code)
+- [Real-world feature build with Claude Code, aihero.dev](https://www.aihero.dev/real-world-feature-build-with-claude-code)
 - [mattpocock/skills (MIT)](https://github.com/mattpocock/skills)
 - [Leonxlnx/unlazy (MIT)](https://github.com/Leonxlnx/unlazy)
 - [Leonxlnx/taste-skill (MIT)](https://github.com/Leonxlnx/taste-skill)
-- Dave Brown — `decision-council`, the business-memory template set
+- Dave Brown, `decision-council`, the business-memory template set
 
 *Derived from the above. This document and our local skills add adaptive output, the tier
 taxonomy, the mid-flow entry rule, and the wave-dispatch amendment.*

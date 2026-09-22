@@ -1,14 +1,14 @@
 """Shared path filtering for the OKF scripts.
 
 An OKF bundle is the docs *you* own. Almost every project under a bundle is a
-git repo of your own, and those must be processed normally — so "is a nested
+git repo of your own, and those must be processed normally, so "is a nested
 git repo" is NOT the test. The test is ownership: a repo cloned from someone
 else (a vendored dependency, an upstream checkout kept for reference) is their
 source tree. Enriching it writes frontmatter into files you do not own, dirties
 that repo's working tree, and contaminates any diff against its upstream.
 
 A nested repo is treated as FOREIGN when its `origin` remote resolves to an
-owner outside `owned_owners()`. A repo with no remote is treated as yours —
+owner outside `owned_owners()`. A repo with no remote is treated as yours,
 local-only projects are common and must keep working.
 
 Set OKF_OWNERS to override detection, e.g. `OKF_OWNERS=Nombru,my-org`.
@@ -42,7 +42,7 @@ def owned_owners():
     """Account names whose repos count as yours.
 
     OKF_OWNERS wins. Otherwise fall back to the gh CLI's authenticated login,
-    then git's `github.user`. If none resolve, returns an empty set — callers
+    then git's `github.user`. If none resolve, returns an empty set, callers
     then treat every repo as owned, preserving the previous behaviour rather
     than silently skipping content.
     """

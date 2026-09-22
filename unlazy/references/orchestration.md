@@ -12,7 +12,7 @@ plan, dispatch, verify, and integrate.
 1. **Plan.** Write PLAN.md (contract, tree, gates file per leaf and branch)
    from templates/PLAN.md. This is the only step where the whole task must
    fit in one head. The contract must assign every leaf its own files, and
-   the tree must record each leaf's **wave** — see Wave dispatch below.
+   the tree must record each leaf's **wave**: see Wave dispatch below.
 2. **Dispatch the whole ready wave, concurrently.** The ready wave is every
    leaf whose blocking leaves are already verified. Spawn them together, up
    to the harness concurrency cap, not one at a time. Each subagent's entire
@@ -42,7 +42,7 @@ one leaf ... dispatch the next leaf", with concurrency mentioned afterwards as
 something that `can` happen. Followed literally that serialises a build: a
 reported test run spent three to four hours and produced a login page. The
 contract already guarantees disjoint file ownership, so the permission was
-always safe — it just was not an instruction. It is one now.*
+always safe, it just was not an instruction. It is one now.*
 
 Dispatch is concurrent by default and sequential only by exception.
 

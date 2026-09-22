@@ -1,24 +1,24 @@
 ---
 name: imagegen
-description: How to actually generate an image on this machine — routing between the local SDXL pipeline and Hugging Face Spaces (FLUX.1-schnell, Qwen-Image, Kontext editing), with the licence and cost trade-off for each. Use whenever a task needs an image made rather than found: design references, section comps, mockups, marks, brand exploration, or when a skill like imagegen-frontend-web or image-to-code asks for generated imagery.
+description: How to actually generate an image on this machine, routing between the local SDXL pipeline and Hugging Face Spaces (FLUX.1-schnell, Qwen-Image, Kontext editing), with the licence and cost trade-off for each. Use whenever a task needs an image made rather than found: design references, section comps, mockups, marks, brand exploration, or when a skill like imagegen-frontend-web or image-to-code asks for generated imagery.
 ---
 
 # Image generation on this machine
 
-Two routes exist. Neither is a default — pick by **what the output is for**.
+Two routes exist. Neither is a default, pick by **what the output is for**.
 
 > This is the shim `taste-skill`'s `imagegen-frontend-web`, `imagegen-frontend-mobile`,
 > `image-to-code` and `brandkit` need. Those skills say "generate the image"; this says how.
 
-## Route A — Hugging Face Spaces (`dynamic_space`)
+## Route A, Hugging Face Spaces (`dynamic_space`)
 
 Use for anything that leaves the machine or feeds commercial work.
 
 | Need | Space |
 |---|---|
-| General image, fast, permissively licensed | `evalstate/flux1_schnell` — **FLUX.1-schnell, Apache-2.0** |
+| General image, fast, permissively licensed | `evalstate/flux1_schnell`: **FLUX.1-schnell, Apache-2.0** |
 | Higher quality, more natural | `mcp-tools/FLUX.1-Krea-dev` |
-| **The image must contain readable text** — UI comps, section headings, nav labels | `mcp-tools/Qwen-Image` (or `-Fast`) |
+| **The image must contain readable text**: UI comps, section headings, nav labels | `mcp-tools/Qwen-Image` (or `-Fast`) |
 | Change an existing image instead of regenerating it | `mcp-tools/FLUX.1-Kontext-Dev` |
 | Restore, upscale, remove an object | `prithivMLmods/Photo-Mate-i2i` · `fffiloni/InstantIR` |
 
@@ -29,7 +29,7 @@ For UI and section comps, reach for **Qwen-Image** rather than a FLUX variant. D
 other than Qwen render text as plausible-looking gibberish, which is worse than no text in a
 mockup someone is meant to build from.
 
-## Route B — local SDXL
+## Route B, local SDXL
 
 `04-Toolkit/imagegen/gen.py`. Free, offline, no rate limit, roughly 20 s an image, weights
 already cached (6.6 GB).
@@ -43,11 +43,11 @@ already cached (6.6 GB).
 run writes its images plus the exact prompt and a `meta.json` of seeds and timings, so any
 result reproduces.
 
-Use it for **volume and exploration** — sweeping seeds, trying twenty directions, anything
+Use it for **volume and exploration**: sweeping seeds, trying twenty directions, anything
 throwaway. It is the cheap route and nothing about it touches the network.
 
 > **Licence caveat.** The model is `stabilityai/stable-diffusion-xl-base-1.0`, under
-> **CreativeML Open RAIL++-M** — not Apache-2.0. (The README still describes FLUX.1-schnell;
+> **CreativeML Open RAIL++-M**: not Apache-2.0. (The README still describes FLUX.1-schnell;
 > that turned out to be gated and `gen.py:23` records the swap. The README is stale.) For
 > exploration this is fine. For output that ships as brand or client work, use Route A's
 > `flux1_schnell` instead, which is Apache-2.0 and needs no further thought.
@@ -70,4 +70,4 @@ throwaway. It is the cheap route and nothing about it touches the network.
 - **Keep the prompt with the output.** Route B does this automatically; on Route A, save the
   prompt next to the image yourself.
 - **Check `design-language/` and `04-Toolkit/design-kits` first.** If the project has a house
-  aesthetic, the generated image conforms to it — it does not propose a new one.
+  aesthetic, the generated image conforms to it, it does not propose a new one.
