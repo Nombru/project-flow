@@ -1,4 +1,4 @@
-# Project Flow — a staged skill system for agentic coding
+# Project Flow: a staged skill system for agentic coding
 
 A set of [Claude Code](https://claude.com/claude-code) skills that turn "ask an agent to build
 something" into a staged process with alignment up front, work sliced small, and a definition of
@@ -78,13 +78,13 @@ unattended.
 
 Every skill is exactly one tier, and the tier decides behaviour rather than importance.
 
-- **Pipeline** — sequenced and stateful, ends by naming the next stage.
-- **Discipline** — cross-cutting, changes *how* a stage runs, never names a next stage.
-- **Craft** — domain taste, fires only when the work is in that domain.
-- **Knowledge** — maintains standing context, produces no code and takes no ticket.
+- **Pipeline**: sequenced and stateful, ends by naming the next stage.
+- **Discipline**: cross-cutting, changes *how* a stage runs, never names a next stage.
+- **Craft**: domain taste, fires only when the work is in that domain.
+- **Knowledge**: maintains standing context, produces no code and takes no ticket.
 
 > The test: if a skill ends by pointing at a next stage, it is a stage. If it points somewhere
-> *and* wraps other work, it is mislabelled — a discipline claiming to be a stage will fight the
+> *and* wraps other work, it is mislabelled; a discipline claiming to be a stage will fight the
 > stage it is wrapping.
 
 ## Install
