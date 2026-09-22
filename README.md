@@ -48,6 +48,32 @@ its own eligibility.
 begins. Each gate carries a `CHECK:` command and an `EXPECT:` match, so completion is a shell exit
 code. An agent cannot declare victory past a gate that has not run.
 
+## What it measured
+
+Routing is only worth deciding once if the answer is not obvious. It was not.
+
+Across **168 tickets** on a real iOS project, **14 were ever agent-eligible. That is 8.3%.**
+
+| | Count | Closed | Still open |
+|---|---:|---:|---:|
+| `ready-for-agent` | 14 | 14 | **0** |
+| `ready-for-human` | 97 | 50 | 47 |
+| `in-progress` | 3 | 3 | 0 |
+
+The eligibility criterion was fixed at stage 3 before any of this ran, so that is a measured rate
+and not a post-hoc rationalisation. The queue did not drift toward being human. It was human from
+the start, and slicing more of it only produced more human work.
+
+The unattended overnight runner wrote **3 pull requests** that a human reviewed and merged. It was
+retired on 2026-08-03, after three independent passes (a readiness review, a design-review triage,
+and slicing one more arc, which produced 13 further tickets and not one of them eligible) found the
+eligible queue structurally empty. The 8.3% count was taken on 2026-08-29 and confirmed what the
+decision had already assumed.
+
+A loop that fires nightly into an empty queue is a liability rather than a tool. The honest result
+of building this router was learning how little of real product work an agent should be handed
+unattended.
+
 ## Tiers
 
 Every skill is exactly one tier, and the tier decides behaviour rather than importance.
