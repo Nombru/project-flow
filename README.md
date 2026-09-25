@@ -64,11 +64,13 @@ The eligibility criterion was fixed at stage 3 before any of this ran, so that i
 and not a post-hoc rationalisation. The queue did not drift toward being human. It was human from
 the start, and slicing more of it only produced more human work.
 
-The unattended overnight runner wrote **3 pull requests** that a human reviewed and merged. It was
-retired on 2026-08-03, after three independent passes (a readiness review, a design-review triage,
-and slicing one more arc, which produced 13 further tickets and not one of them eligible) found the
-eligible queue structurally empty. The 8.3% count was taken on 2026-08-29 and confirmed what the
-decision had already assumed.
+The unattended runner opened **6 pull requests**, and a human reviewed and merged **5**; the four
+that changed the app shipped in TestFlight builds 55, 57 and 61. Its nightly run was retired on
+2026-08-03, after three independent passes (a readiness review, a design-review triage, and slicing
+one more arc, which produced 13 further tickets and not one of them eligible) found the eligible
+queue structurally empty. The schedule itself stopped firing on 2026-09-03, and the runner now
+starts only by hand. The 8.3% count was taken on 2026-08-29 and confirmed what the decision had
+already assumed.
 
 A loop that fires nightly into an empty queue is a liability rather than a tool. The honest result
 of building this router was learning how little of real product work an agent should be handed
